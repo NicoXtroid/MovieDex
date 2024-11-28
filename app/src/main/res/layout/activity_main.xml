@@ -37,14 +37,7 @@
         android:layout_gravity="center_horizontal"
         android:paddingVertical="4dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnGetAll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:text="Premiere"/>
-
-        <com.google.android.material.button.MaterialButton
+                <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGetPopular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
