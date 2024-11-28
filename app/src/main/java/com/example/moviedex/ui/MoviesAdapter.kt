@@ -41,14 +41,14 @@ class MoviesAdapter(
         val movie = moviesList[position]
 
         Glide.with(context)
-            .load("${Constants.API_IMAGE_URL}${movie.poster_path}")
+            .load("${Constants.API_IMAGE_URL}${movie.posterPath}")
             .apply(RequestOptions().override(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT))
             .into(holder.ivImage)
 
         holder.tvInfo.text = HtmlCompat.fromHtml(
             "<b>Title:</b> " +movie.title +
             "<br><b>Poularity:</b> "+ movie.popularity+
-            "<br><b>Rating:</b> "+ movie.vote_average,
+            "<br><b>Rating:</b> "+ movie.voteAverage,
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
 

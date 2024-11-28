@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedex.databinding.ActivityMainBinding
 import com.example.moviedex.ui.MoviesAdapter
 import com.example.moviedex.viewmodel.MoviesViewModel
@@ -36,28 +37,33 @@ class MainActivity : AppCompatActivity() {
         tvCategory = findViewById(R.id.tvCategory)
 
         viewModel = ViewModelProvider(this)[MoviesViewModel::class.java]
-        setupRecyclerView()
+
+
+        viewModel.getAllMovies()
 
         tvCategory.text = "POPULAR"
-        viewModel.getPopularMovies()
-
+        //viewModel.getPopularMovies()
         viewModel.moviesList.observe(this){
             adapterMovies.moviesList = it
             adapterMovies.notifyDataSetChanged()
         }
 
-        /*
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        viewModel.getTopRatedMovies()
+        viewModel.topMoviesList.observe(this){
+            adapterMovies.moviesList = it
+            adapterMovies.notifyDataSetChanged()
         }
 
-         */
+        viewModel.getUpcomingMovies()
+        viewModel.upcomingMoviesList.observe(this){
+            adapterMovies.moviesList = it
+            adapterMovies.notifyDataSetChanged()
+        }
+        setupRecyclerView()
     }
 
     private fun setupRecyclerView(){
-        val layoutManager = GridLayoutManager(this, 3)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvMovies.layoutManager = layoutManager
         adapterMovies = MoviesAdapter(this, arrayListOf())
         binding.rvMovies.adapter = adapterMovies
